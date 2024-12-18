@@ -61,16 +61,7 @@
   color: var(--accent-color);
 }
 
-    #progress {
-      background-color: rgba(46, 204, 113, 0.1);
-      color: var(--secondary-color);
-      border-radius: 10px;
-      padding: 12px;
-      margin: 1rem 0;
-      font-weight: 500;
-      display: inline-block;
-      box-shadow: 0 4px 6px var(--shadow-color);
-    }
+
 
     input {
       width: 100%;
@@ -160,9 +151,9 @@
 <body>
   <div class="container">
     <h1>Zoho Learntube</h1>
-    <p id="progress">Video Progress: 0%</p>
-    <p id="progress">Video Progress: 0%</p>
-
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
     <div id="certificate" style="display: none;">
       <input type="text" id="userName" placeholder="Enter your name">
       <button id="generateCertificate">Generate Certificate</button>
