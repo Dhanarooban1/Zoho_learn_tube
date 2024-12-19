@@ -8,12 +8,12 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #3498db;      /* Vibrant Blue */ 
-      --secondary-color: #2ecc71;    /* Soft Green */
-      --accent-color: #e74c3c;       /* Warm Red */
-      --background-color: #f7f9fc;   /* Soft Blue-White */
-      --text-color: #2c3e50;         /* Dark Slate Blue */
-      --card-background: #ffffff;    /* Pure White */
+      --primary-color: #3498db;      
+      --secondary-color: #2ecc71;   
+      --accent-color: #e74c3c;       
+      --background-color: #f7f9fc;   
+      --text-color: #2c3e50;         
+      --card-background: #ffffff;    
       --shadow-color: rgba(0,0,0,0.1);
     }
 
@@ -112,7 +112,6 @@
       border: 2px dashed var(--primary-color);
       border-radius: 12px;
       padding: 1.5rem;
-
       margin-top: 1rem;
     }
 
@@ -157,10 +156,13 @@
     </div>
 
 
-    <div id="certificateSection" style="display: none;">
-      <div id="progressContainer">
-        <div id="progressBar"></div>
-      </div>
+    <div id="progressContainer">
+      <div id="progressBar">hello</div>
+     </div>
+     <!-- Certificate UI -->
+   <div id="certificateSection" style="display: none;">
+     
+
     <div id="certificate" style="display: none;">
       <input type="text" id="userName" placeholder="Enter your name">
       <button id="generateCertificate">Generate Certificate</button>
@@ -168,9 +170,12 @@
 
     <button id="downloadCertificateButton" style="display: none;">Download Certificate</button>
     <button id="shareLinkedInButton" style="display: none;">Share on LinkedIn</button>
-    </div>
 
-<div id="quizSection" style="display: none;">
+  </div>
+
+
+
+  <div id="quizSection" style="display: none;">
     <input type="text" id="userQuestion" placeholder="Ask about a topic (e.g., Learn Java)">
     <button id="submitQuestion">Generate</button>
     <div id="quizContainer" style="display: none;">
@@ -178,8 +183,10 @@
       <div id="quizQuestions"></div>
     </div>
   </div>
-  </div>
-  <script src="Ui.js"></script>
+
+
+</div>
+<script src="Ui.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
