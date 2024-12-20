@@ -115,10 +115,8 @@ document.addEventListener('DOMContentLoaded', () => {
         downloadButton.style.display = 'inline-block';
         shareButton.style.display = 'inline-block';
         generateButton.style.display = 'none';
-        console.log('Certificate generated');
     }
 
-    // Function to download the certificate
     function downloadCertificate() {
         const link = document.createElement('a');
         link.href = 'data:text/html;charset=utf-8,' + encodeURIComponent(certificateContent);
@@ -126,7 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
     }
 
-    // Function to share the certificate on LinkedIn
     function shareOnLinkedIn() {
         const certificateUrl = window.location.href;
         const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(certificateUrl)}`;
