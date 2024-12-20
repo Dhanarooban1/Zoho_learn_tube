@@ -45,28 +45,34 @@ window.onload = function() {
       }
 
       videoElement.addEventListener('timeupdate', () => {
-          const progress = (videoElement.currentTime / videoElement.duration) * 100;
-          const videoTitle = document.title;
-          const progressFixed = progress.toFixed(2);
-          sendMessageToBackground({
-              type: "progress_update",
-              videoProgress: progressFixed,
-              videoTitle: videoTitle
-          });
-          safelyStoreProgress(progressFixed, videoTitle);
-
-          if (progress >= 99.9) {
-              try {
-                  chrome.storage.sync.set({ videoCompleted: true }, () => {
-                      if (chrome.runtime.lastError) {
-                          console.warn('Error storing completion:', chrome.runtime.lastError);
-                      }
-                  });
-              } catch (error) {
-                  console.warn('Error storing completion:', error);
-              }
-          }
-      });
+        chrome.storage.sync.get(['videoCompleted'], (result) => {
+            if (result.videoCompleted) {
+                return;
+            }
+            const progress = (videoElement.currentTime / videoElement.duration) * 100;
+            const videoTitle = document.title;
+            const progressFixed = progress.toFixed(2);
+            sendMessageToBackground({
+                type: "progress_update",
+                videoProgress: progressFixed,
+                videoTitle: videoTitle
+            });
+            safelyStoreProgress(progressFixed, videoTitle);
+    
+            if (progress == 100) {
+                try {
+                    chrome.storage.sync.set({ videoCompleted: true }, () => {
+                        if (chrome.runtime.lastError) {
+                            console.warn('Error storing completion:', chrome.runtime.lastError);
+                        }
+                    });
+                } catch (error) {
+                    console.warn('Error storing completion:', error);
+                }
+            }
+        });
+    });
+    
   }
 
   // Start tracking after a small delay to ensure everything is loaded

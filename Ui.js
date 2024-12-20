@@ -18,10 +18,23 @@ generateQuizButton.addEventListener('click', () => {
     updateUI(); // Update the display
 });
 
-resetCertificateButton.addEventListener('click', () => { // Updated
-    localStorage.setItem('currentSection', 'buttons'); // Reset to default state
+resetCertificateButton.addEventListener('click', () => {
+    // Reset UI to default state
+    localStorage.setItem('currentSection', 'buttons'); 
     updateUI(); // Update the display
+
+    // Reset progress and related elements
+    chrome.storage.sync.set({ videoCompleted: false, videoProgress: 0 }, () => {
+        if (chrome.runtime.lastError) {
+            console.error('Error resetting progress:', chrome.runtime.lastError);
+            return;
+        }// Reset progress display
+        certificateElement.style.display = 'none'; // Hide certificate
+        generateButton.style.display = 'block'; // Show generate button again
+        console.log('Progress reset successfully.');
+    });
 });
+
 
 resetQuizButton.addEventListener('click', () => { // Updated
     localStorage.setItem('currentSection', 'buttons'); // Reset to default state
