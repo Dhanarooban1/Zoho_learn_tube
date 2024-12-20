@@ -156,14 +156,15 @@
       <button id="generateQuizButton">Generate Video & Certify Quiz</button>
     </div>
 
-
     <div id="certificateSection" style="display: none;">
       <div id="progressContainer">
         <div id="progressBar">Welcome! Start watching videos</div>
+        <button id="resetCertificateButton">Restart</button>
       </div>
     <div id="certificate" style="display: none;">
       <input type="text" id="userName" placeholder="Enter your name">
       <button id="generateCertificate">Generate Certificate</button>
+     
     </div>
     
     <button id="downloadCertificateButton" style="display: none;">Download Certificate</button>
@@ -171,14 +172,20 @@
     </div>
     
 <div id="quizSection" style="display: none;">
-    <input type="text" id="userQuestion" placeholder="Ask about a topic (e.g., Learn Java)">
-    <button id="submitQuestion">Generate</button>
-    <div id="quizContainer" style="display: none;">
-      <h2>Quiz</h2>
-      <div id="quizQuestions"></div>
-    </div>
+  <textarea id="userQuestion" rows="5" placeholder="Enter your learning request"></textarea>
+  <button id="submitQuestion">Submit Question</button>
+  <div id="responseArea">
+    <div id="videoD"></div>
+    <div id="quizQuestions"></div>
+  </div>
+  <div id = "docLink">
+    <a id ="googleDocLink" href="#"  style = "display: none;" target="_blank">Related Documents</a>
+  </div>
+  <button id="resetQuizButton">Restart</button>
   </div>
 </div>
+<script src="Express.js"></script>
+<script src="Qqg.js"></script>
 <script src="Ui.js"></script>
 <script src="popup.js"></script>
 </body>

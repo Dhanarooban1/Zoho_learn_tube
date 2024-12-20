@@ -8,12 +8,12 @@
       "activeTab"
     ],
     "background": {
-    "service_worker": "background.js"
+    "service_worker":"Backend/background.js"
   },
     "action": {
       "default_popup": "Page.html"
     },
-  
+      "author": "dhanazx1@gmail.com",
   "content_scripts": [
       {
         "matches": ["*://*.youtube.com/*"],
@@ -22,7 +22,8 @@
       }
     ],
     "host_permissions": [
-      "*://*.youtube.com/*"
+      "*://*.youtube.com/*",
+      "https://gemini.googleapis.com/"
     ]
   }
   
