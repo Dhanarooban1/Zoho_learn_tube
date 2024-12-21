@@ -8,16 +8,16 @@
       "activeTab"
     ],
     "background": {
-    "service_worker":"Backend/background.js"
+    "service_worker":"dist/background.bundle.js"
   },
     "action": {
-      "default_popup": "Page.html"
+      "default_popup": "dist/index.html"
     },
       "author": "dhanazx1@gmail.com",
   "content_scripts": [
       {
         "matches": ["*://*.youtube.com/*"],
-        "js": ["content.js"],
+        "js": ["dist/content.bundle.js"],
         "run_at": "document_idle"
       }
     ],

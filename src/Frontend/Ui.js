@@ -6,8 +6,9 @@ const resetQuizButton = document.getElementById('resetQuizButton'); // Updated
 const certificateSection = document.getElementById('certificateSection');
 const quizSection = document.getElementById('quizSection');
 const buttonContainer = document.getElementById('buttonContainer');
-
+const generateButton = document.getElementById('generateButton')
 // Event Listeners
+
 watchCertifyButton.addEventListener('click', () => {
     localStorage.setItem('currentSection', 'certificate'); // Save selected section
     updateUI(); // Update the display
@@ -29,8 +30,7 @@ resetCertificateButton.addEventListener('click', () => {
             console.error('Error resetting progress:', chrome.runtime.lastError);
             return;
         }// Reset progress display
-        certificateElement.style.display = 'none'; // Hide certificate
-        generateButton.style.display = 'block'; // Show generate button again
+        // generateButton.style.display = 'block'; // Show generate button again
         console.log('Progress reset successfully.');
     });
 });

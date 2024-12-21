@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             chrome.storage.sync.get(['videoCompleted'], (result) => {
                 if (result.videoCompleted) {
                     progressElement.textContent = `Video Progress: 100% (Certificate Generated)`;
-                    certificateElement.style.display = 'block';
                     generateButton.style.display = 'block';
                 } else {
                     progressElement.textContent = `Video Progress: ${Math.round(progress)}%`;
