@@ -32,10 +32,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/Frontend/index.html', 
       filename: 'index.html', 
-      chunks: ['popup',"ui","gemini"]
+      chunks: ["content",'popup',"ui","gemini"]
     })
   ],
   resolve: {
     extensions: ['.js']
-  }
+  },
 };

@@ -23,7 +23,8 @@
     ],
     "host_permissions": [
       "*://*.youtube.com/*",
-      "https://gemini.googleapis.com/"
+      "https://gemini.googleapis.com/",
+      "https://generativeai.googleapis.com/"  
     ]
   }
   
