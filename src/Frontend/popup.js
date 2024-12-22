@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgressDisplay(progress);
         
         if (result.videoCompleted) {
-            
+             certificateSection.style.display = 'none';
             generateButton.addEventListener('click', () => {
                 const userName = userNameInput.value.trim();
                 if (userName) {
