@@ -43,16 +43,13 @@ resetQuizButton.addEventListener('click', () => { // Updated
 
 // Function to update the UI based on localStorage
 function updateUI() {
-    const currentSection = localStorage.getItem('currentSection') || 'buttons'; // Default to 'buttons'
-
-    // Reset all sections
+    const currentSection = localStorage.getItem('currentSection');
     certificateSection.style.display = 'none';
     quizSection.style.display = 'none';
     buttonContainer.style.display = 'block';
     watchCertifyButton.disabled = false;
     generateQuizButton.disabled = false;
 
-    // Show the appropriate section based on the state
     if (currentSection === 'certificate') {
         certificateSection.style.display = 'block';
         buttonContainer.style.display = 'none';

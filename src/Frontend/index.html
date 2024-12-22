@@ -8,23 +8,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #3498db;      /* Vibrant Blue */ 
-      --secondary-color: #2ecc71;    /* Soft Green */
-      --accent-color: #e74c3c;       /* Warm Red */
+      --primary-color: #3498db;     
+      --secondary-color: #2ecc71;    
+      --accent-color: #e74c3c;       
       --background-color: #f7f9fc;   /* Soft Blue-White */
       --text-color: #2c3e50;         /* Dark Slate Blue */
       --card-background: #ffffff;    /* Pure White */
       --shadow-color: rgba(0,0,0,0.1);
     }
-
     * {
-      
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       transition: all 0.3s ease;
     }
-
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, var(--background-color), #ffffff);
@@ -35,11 +32,8 @@
       padding: 2rem;
       line-height: 1.6;
     }
-
-  
-
     h1 {
-  color: black; /* Primary blue color from Zoho logo */
+  color: black;
   margin-bottom: 1.5rem;
   font-weight: 600;
   display: flex;
@@ -144,6 +138,31 @@
     #certificate, #quizContainer {
       animation: fadeIn 0.5s ease forwards;
     }
+
+    
+
+
+#Summarybtn {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#Summarybtn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  background-image: url('/Public/Kalviumlogo.webp');
+  background-size: cover;
+  background-position: center;
+}
     
     </style>
 </head>
@@ -163,7 +182,6 @@
     <div id="certificate" style="display: none;">
       <input type="text" id="userName" placeholder="Enter your name">
       <button id="generateCertificate">Generate Certificate</button>
-     
     </div>
     
     <button id="downloadCertificateButton" style="display: none;">Download Certificate</button>
@@ -172,11 +190,32 @@
     
 <div id="quizSection" style="display: none;">
   <textarea id="userQuestion" rows="5" placeholder="Enter your learning request"></textarea>
-  <button id="submitQuestion">Submit Question</button>
-  <div id="responseArea">
-    <div id="videoD"></div>
-    <div id="quizQuestions"></div>
+  <div class="summary-container" style="
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 25px;
+  background: linear-gradient(145deg, #ffffff, #f0f7ff);
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;">
+  
+  <div class="summary-header" style="
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #e1e8ff;">
+     
+  
+  <div id="videoD" style="
+      line-height: 1.8;
+      color: #2d3748;
+      font-size: 16px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;">
   </div>
+  <button id="Summarybtn"></button>
+</div>
   <div id = "docLink">
     <a id ="googleDocLink" href="#"  style = "display: none;" target="_blank">Related Documents</a>
   </div>

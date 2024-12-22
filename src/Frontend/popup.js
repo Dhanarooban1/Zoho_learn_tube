@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateProgressDisplay(progress);
         
         if (result.videoCompleted) {
+            
             generateButton.addEventListener('click', () => {
                 const userName = userNameInput.value.trim();
                 if (userName) {

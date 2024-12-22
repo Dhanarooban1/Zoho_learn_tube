@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+
 
 window.onload = function() {
   if (typeof chrome === 'undefined' || !chrome.runtime) {
@@ -78,32 +78,4 @@ window.onload = function() {
   }
   setTimeout(initializeVideoTracking, 1000);
 
-  const submitQuestion = document.getElementById('submitQuestion');
-  submitQuestion.addEventListener('click', function() {
-      const Prompt = document.getElementById('userQuestion').value;
-      async function executePrompt(Prompt) {
-          const summariesContainer = document.getElementById('videoD');
-          summariesContainer.innerHTML = 'Processing...';
-
-          // Function to get AI response
-          async function getGeminiResponse(content) {
-              const apiKey = `AIzaSyB1rICUSO4GYdpzY-dkX_kcdRubBplApCI`;
-              const genAI = new GoogleGenerativeAI(apiKey);
-              const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-              const fullContent = content;
-              try {
-                  const result = await model.generateContent(fullContent);
-                  const response = await result.response;
-                  const textResponse = await response.text();
-                  summariesContainer.innerHTML = textResponse;
-              } catch (error) {
-                  console.error('Error generating processing:', error);
-                  summariesContainer.innerHTML = 'Error processing your request.';
-              }
-          }
-
-          await getGeminiResponse(Prompt);
-      }
-      executePrompt(Prompt);
-  });
 };
