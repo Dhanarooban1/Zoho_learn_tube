@@ -16,10 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateProgressDisplay(progress) {
         if (typeof progress === 'number' && !isNaN(progress)) {
-            chrome.storage.sync.get(['videoCompleted','generategeneratedCertificateShown'], (result) => {
+            chrome.storage.sync.get(['videoCompleted','CCC'], (result) => {
                 if (result.videoCompleted) {
                     progressElement.textContent = `Video Progress: 100% (Certificate Generated)`;
-                    generatecertificatesectionElement.style.display = 'block';
+                        generatecertificatesectionElement.style.display = 'block';
                 } else {
                     progressElement.textContent = `Video Progress: ${Math.round(progress)}%`;
                 }
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             progressElement.textContent = 'Welcome! Start watching videos';
         }
     }
-    
 
     chrome.storage.sync.get(['title', 'videoProgress', 'videoCompleted'], (result) => {
         if (chrome.runtime.lastError) {
@@ -113,7 +112,19 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         </div>
         `;
-         certificateElement.innerHTML = certificateContent;
+        
+        try {
+            chrome.storage.sync.set({ CCC: certificateContent }, () => {
+                chrome.storage.sync.get(['CCC'], (result) => {
+                    if (result.CCC) {
+                        certificateElement.innerHTML = result.CCC;
+                    }
+                });
+            });
+        } catch (error) {
+            console.error('Unexpected error:', error);
+        }
+        
         downloadButton.style.display = 'inline-block';
         shareButton.style.display = 'inline-block';
     generatedcertificatesectionElement.style.display = 'block';

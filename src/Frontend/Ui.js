@@ -27,6 +27,8 @@ watchCertifyButton.addEventListener('click', () => {
     chrome.storage.sync.set({ currentSection: SECTIONS.QUIZ }, updateUI);
   });
 
+  
+
 
 
   resetCertificateBtnElement.addEventListener('click', () => {
@@ -49,23 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
 
-//   chrome.storage.sync.get(['title', 'videoProgress', 'videoCompleted'], (result) => {
-//     if (chrome.runtime.lastError) {
-//         console.error('Error fetching initial progress:', chrome.runtime.lastError);
-//         updateProgressDisplay(null);
-//         return;
-//     }
-  
-
 
 
   function updateUI() {
     chrome.storage.sync.get(['currentSection','videoCompleted','username'], (data) => {
       const currentSection = data.currentSection || SECTIONS.BUTTONS;
       const videoCompleted = data.videoCompleted || false;
-      const Username = data.usename;
-      console.log(Username)
-
+   
       // certificateSection.style.display = 'none';
       // quizSection.style.display = 'none';
       // buttonContainerElement.style.display = 'none';
@@ -94,6 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+
+
 
 
  
