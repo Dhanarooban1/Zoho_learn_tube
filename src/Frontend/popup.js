@@ -3,7 +3,7 @@ import logoBase6 from "../Frontend/BaseImage"
 document.addEventListener('DOMContentLoaded', () => {
     const generateButton = document.getElementById('generateCertificatebtn');
     const generatecertificatesectionElement = document.getElementById('Generatecertificatesection')
-    const generatedcertificatesectionElement  = document.getElementById('generatedcertificatesection')
+    const generatedcertificatesectionElement = document.getElementById('generatedcertificatesection')
     const progressElement = document.getElementById('progressBar');
     const certificateElement = document.getElementById('certificateDiv');
     const userNameInput = document.getElementById('userName');
@@ -11,15 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const shareButton = document.getElementById('shareLinkedInButton');
     let certificateContent = ''; 
 
-    // Function to update progress display add this to ui page 
-
-
     function updateProgressDisplay(progress) {
         if (typeof progress === 'number' && !isNaN(progress)) {
-            chrome.storage.sync.get(['videoCompleted','CCC'], (result) => {
+            chrome.storage.sync.get(['videoCompleted', 'CCC'], (result) => {
                 if (result.videoCompleted) {
                     progressElement.textContent = `Video Progress: 100% (Certificate Generated)`;
-                        generatecertificatesectionElement.style.display = 'block';
+                    generatecertificatesectionElement.style.display = 'block';
                 } else {
                     progressElement.textContent = `Video Progress: ${Math.round(progress)}%`;
                 }
@@ -27,6 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             progressElement.textContent = 'Welcome! Start watching videos';
         }
+    }
+
+    // Check for existing certificate on load
+    function checkExistingCertificate() {
+        chrome.storage.sync.get(['CCC', 'certificateGenerated', 'userName'], (result) => {
+            if (result.CCC && result.certificateGenerated) {
+                // Restore the certificate content
+                certificateContent = result.CCC;
+                certificateElement.innerHTML = result.CCC;
+                
+                // Restore the username if saved
+                if (result.userName) {
+                    userNameInput.value = result.userName;
+                }
+                
+                // Show the generated certificate section
+                generatedcertificatesectionElement.style.display = 'block';
+                generatecertificatesectionElement.style.display = 'none';
+                
+                // Show the buttons
+                downloadButton.style.display = 'inline-block';
+                shareButton.style.display = 'inline-block';
+            }
+        });
     }
 
     chrome.storage.sync.get(['title', 'videoProgress', 'videoCompleted'], (result) => {
@@ -37,50 +58,44 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const progress = parseFloat(result.videoProgress) || 0;
         updateProgressDisplay(progress);
+        
+        // Check for existing certificate after getting initial progress
+        checkExistingCertificate();
 
-            generateButton.addEventListener('click', () => {
-                const userName = userNameInput.value.trim();
-                console.log(userName)
-                if (userName) {
-                    chrome.storage.sync.get(['title'], (result) => {
-                        if (!chrome.runtime.lastError && result.title) {
-                            generateCertificate(userName, result.title);
-
-                        } else {
-                            console.error('Failed to get video title');
-                            alert('Failed to generate certificate. Please try again.');
-                        }
-                    });
-                } else {
-                    alert('Please enter your name');
-                }
-            });
-    
+        generateButton.addEventListener('click', () => {
+            const userName = userNameInput.value.trim();
+            if (userName) {
+                chrome.storage.sync.get(['title'], (result) => {
+                    if (!chrome.runtime.lastError && result.title) {
+                        generateCertificate(userName, result.title);
+                    } else {
+                        console.error('Failed to get video title');
+                        alert('Failed to generate certificate. Please try again.');
+                    }
+                });
+            } else {
+                alert('Please enter your name');
+            }
+        });
     });
 
-
-   
-   
     chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         if (message.type === 'progress_update' && message.videoProgress !== undefined) {
             const progress = parseFloat(message.videoProgress);
             updateProgressDisplay(progress);
         }
         sendResponse({ received: true });
-        return true; // Keeps the message channel open for async responses
+        return true;
     });
 
-    
-        
     if (!logoBase6) {
         console.error('logoBase6 variable not found');
         return;
     }
 
-
     function generateCertificate(userName, title) {
         certificateContent = `
-          <div style="max-width: 800px; margin: auto; padding: 40px; font-family: 'Arial', sans-serif; background-color: #f9f9f9; border: 2px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; overflow: hidden; text-align: center; background-image: url('${logoBase6}'); background-size: cover; background-position: center;">
+            <div style="max-width: 800px; margin: auto; padding: 40px; font-family: 'Arial', sans-serif; background-color: #f9f9f9; border: 2px solid #e0e0e0; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; overflow: hidden; text-align: center; background-image: url('${logoBase6}'); background-size: cover; background-position: center;">
             <!-- Background overlay for better text readability -->
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.95); z-index: 1;"></div>
             
@@ -114,7 +129,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         try {
-            chrome.storage.sync.set({ CCC: certificateContent }, () => {
+            // Save both the certificate content and the generation state
+            chrome.storage.sync.set({ 
+                CCC: certificateContent,
+                certificateGenerated: true,
+                userName: userName
+            }, () => {
                 chrome.storage.sync.get(['CCC'], (result) => {
                     if (result.CCC) {
                         certificateElement.innerHTML = result.CCC;
@@ -127,8 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         downloadButton.style.display = 'inline-block';
         shareButton.style.display = 'inline-block';
-    generatedcertificatesectionElement.style.display = 'block';
-    generatecertificatesectionElement.style.display = 'none';
+        generatedcertificatesectionElement.style.display = 'block';
+        generatecertificatesectionElement.style.display = 'none';
     }
 
     function downloadCertificate() {
@@ -144,7 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(linkedinShareUrl, '_blank');
     }
 
-    // Add event listeners for download and share buttons
     downloadButton.addEventListener('click', downloadCertificate);
     shareButton.addEventListener('click', shareOnLinkedIn);
 });
