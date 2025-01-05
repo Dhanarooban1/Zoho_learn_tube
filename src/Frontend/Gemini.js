@@ -34,8 +34,8 @@ async function executePrompt(videoTitle) {
 
     // Function to get AI response using Gemini API
     async function getGeminiResponse(content) {
-
-        const apiKey = `AIzaSyB1rICUSO4GYdpzY-dkX_kcdRubBplApCI`; // Replace with your API key or use a secure method to fetch it
+        const apiKey = process.env.GOOGLE_API_KEY;
+     
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
