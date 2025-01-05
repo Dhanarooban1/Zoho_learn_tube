@@ -1,68 +1,105 @@
-// Elements
+// Define elements
 const watchCertifyButton = document.getElementById('watchCertifyButton');
 const generateQuizButton = document.getElementById('generateQuizButton');
-const resetCertificateButton = document.getElementById('resetCertificateButton'); // Updated
-const resetQuizButton = document.getElementById('resetQuizButton'); // Updated
+const buttonContainerElement = document.getElementById('buttonContainer');
+
 const certificateSection = document.getElementById('certificateSection');
-const certificateElement = document.getElementById('certificate');
+
+
+const generateCertificatebtnElement = document.getElementById('generateCertificatebtn')
 const quizSection = document.getElementById('quizSection');
-const buttonContainer = document.getElementById('buttonContainer');
-const generateButton = document.getElementById('generateButton')
-// Event Listeners
+
+const resetCertificateBtnElement = document.getElementById('resetCertificateButton')
+
+const SECTIONS = {
+    BUTTONS: 'Btn',
+    CERTIFICATE: 'certificate',
+    QUIZ: 'quiz',
+  };
+
 
 watchCertifyButton.addEventListener('click', () => {
-    localStorage.setItem('currentSection', 'certificate'); // Save selected section
-    updateUI(); // Update the display
-});
+    chrome.storage.sync.set({ currentSection: SECTIONS.CERTIFICATE }, updateUI);
+  });
+  
+ 
+  generateQuizButton.addEventListener('click', () => {
+    chrome.storage.sync.set({ currentSection: SECTIONS.QUIZ }, updateUI);
+  });
 
-generateQuizButton.addEventListener('click', () => {
-    localStorage.setItem('currentSection', 'quiz'); 
-    updateUI(); 
-});
 
-resetCertificateButton.addEventListener('click', () => {
-    localStorage.setItem('currentSection', 'buttons'); 
-    updateUI(); 
-    chrome.storage.sync.set({ videoCompleted: false, videoProgress: 0 }, () => {
-        if (chrome.runtime.lastError) {
-            console.error('Error resetting progress:', chrome.runtime.lastError);
-            return;
-        }
-        console.log('Progress reset successfully.');
+
+  resetCertificateBtnElement.addEventListener('click', () => {
+    chrome.storage.sync.set({ currentSection: SECTIONS.BUTTONS, videoCompleted: false, videoProgress: 0 }, () => {
+      console.log('Progress reset successfully.');
+      updateUI();
     });
-});
+  });
 
 
-resetQuizButton.addEventListener('click', () => { 
-    localStorage.setItem('currentSection', 'buttons'); 
-    updateUI(); 
-});
-
-// Function to update the UI based on localStorage
-function updateUI() {
-    const currentSection = localStorage.getItem('currentSection');
-    certificateSection.style.display = 'none';
-    quizSection.style.display = 'none';
-    buttonContainer.style.display = 'block';
-    watchCertifyButton.disabled = false;
-    generateQuizButton.disabled = false;
-
-    if (currentSection === 'certificate') {
-        certificateSection.style.display = 'block';
-        certificates.style.display = "block";
-        buttonContainer.style.display = 'none';
-        watchCertifyButton.disabled = true;
-    } else if (currentSection === 'quiz') {
-        quizSection.style.display = 'block';
-        buttonContainer.style.display = 'none';
-        generateQuizButton.disabled = true;
-    }
-}
-
-// Initialize UI on page load
 document.addEventListener('DOMContentLoaded', () => {
-    if (!localStorage.getItem('currentSection')) {
-        localStorage.setItem('currentSection', 'buttons'); // Set default state on first load
-    }
-    updateUI(); // Apply the saved state
-});
+    chrome.storage.sync.get(['currentSection'], (data) => {
+      if (!data.currentSection) {
+        chrome.storage.sync.set({ currentSection: SECTIONS.BUTTONS }, updateUI);
+      } else {
+        updateUI();
+      }
+    });
+  });
+  
+
+
+//   chrome.storage.sync.get(['title', 'videoProgress', 'videoCompleted'], (result) => {
+//     if (chrome.runtime.lastError) {
+//         console.error('Error fetching initial progress:', chrome.runtime.lastError);
+//         updateProgressDisplay(null);
+//         return;
+//     }
+  
+
+
+
+  function updateUI() {
+    chrome.storage.sync.get(['currentSection','videoCompleted','username'], (data) => {
+      const currentSection = data.currentSection || SECTIONS.BUTTONS;
+      const videoCompleted = data.videoCompleted || false;
+      const Username = data.usename;
+      console.log(Username)
+
+      // certificateSection.style.display = 'none';
+      // quizSection.style.display = 'none';
+      // buttonContainerElement.style.display = 'none';
+      // GeneratecertificatesectionElement.style.display = 'none';
+      // generatedcertificatesectionElemet.style.display = 'none';
+  
+      // Update visibility based on current section
+      if (currentSection === SECTIONS.CERTIFICATE) {
+        certificateSection.style.display = 'block';
+        Hidebuttons();
+        // if (videoCompleted || videoProgress === 100) {
+        //     console.log("Video completed: showing certificate generation section");
+        //     GeneratecertificatesectionElement.style.display = 'block';
+        //   } else {
+        //     console.log("Video not completed: hiding certificate generation section");
+        //     // GeneratecertificatesectionElement.style.display = 'none';
+        //   }
+          
+      } else if (currentSection === SECTIONS.QUIZ) {
+        quizSection.style.display = 'block';
+        Hidebuttons();
+      } else if (currentSection === SECTIONS.BUTTONS) {
+        // quizSection.style.display = 'none';
+        certificateSection.style.display = 'none';
+        buttonContainerElement.style.display = 'block';
+      }
+    });
+  }
+
+
+ 
+
+
+const Hidebuttons = () => {
+  buttonContainerElement.style.display = 'none';
+};
+

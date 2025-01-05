@@ -1,5 +1,3 @@
-
-
 window.onload = function() {
   if (typeof chrome === 'undefined' || !chrome.runtime) {
       console.warn('Chrome extension APIs are not available');
@@ -48,9 +46,11 @@ window.onload = function() {
 
       videoElement.addEventListener('timeupdate', () => {
         chrome.storage.sync.get(['videoCompleted'], (result) => {
+
             if (result.videoCompleted) {
                 return;
             }
+
             const progress = (videoElement.currentTime / videoElement.duration) * 100;
             const videoTitle = document.title;
             const progressFixed = progress.toFixed(2);

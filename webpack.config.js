@@ -10,7 +10,10 @@ module.exports = {
     popup: './src/Frontend/popup.js',
     ui: './src/Frontend/Ui.js',
     gemini:"./src/Frontend/Gemini.js",
+    gc:'./src/Frontend/Course.js',
+    BaseImage:'./src/Frontend/BaseImage.js',
   },
+
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js' // Generate separate bundles for each entry point
@@ -32,7 +35,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/Frontend/index.html', 
       filename: 'index.html', 
-      chunks: ["content",'popup',"ui","gemini"]
+      chunks: ["content",'popup',"ui","gemini","gc","BaseImage"]
     })
   ],
   resolve: {
