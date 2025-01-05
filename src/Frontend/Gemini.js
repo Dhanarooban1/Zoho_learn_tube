@@ -1,4 +1,3 @@
-
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Get the submit button element
@@ -11,7 +10,7 @@ submitQuestion.addEventListener('click', function () {
             console.warn('Error getting data:', chrome.runtime.lastError);
             return;
         }
-
+        
         const videoTitle = result.title;
 
         if (videoTitle !== undefined) {
@@ -27,15 +26,12 @@ submitQuestion.addEventListener('click', function () {
 async function executePrompt(videoTitle) {
     const summariesContainer = document.getElementById('videoD');
     summariesContainer.innerHTML = 'Processing...';
-
-    // Create the prompt with the video title
-    console.log(videoTitle);
     const prompt = `Please summarize the content of the YouTube video titled '${videoTitle}'. Provide a concise overview of the main points, key topics discussed, and any relevant details. Avoid unnecessary details and focus on the core message of the video. I want you to get a short summary using the given title`;
 
     // Function to get AI response using Gemini API
     async function getGeminiResponse(content) {
-        const apiKey = process.env.GOOGLE_API_KEY;
-     
+        const apiKey = process.env.API_KEY;
+        console.log(apiKey)
         const genAI = new GoogleGenerativeAI(apiKey);
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 

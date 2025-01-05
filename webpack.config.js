@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: 'development', 
@@ -36,7 +37,8 @@ module.exports = {
       template: './src/Frontend/index.html', 
       filename: 'index.html', 
       chunks: ["content",'popup',"ui","gemini","gc","BaseImage"]
-    })
+    }),
+    new Dotenv()
   ],
   resolve: {
     extensions: ['.js']
