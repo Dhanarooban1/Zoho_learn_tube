@@ -19,13 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             chrome.storage.sync.get(['videoCompleted','generategeneratedCertificateShown'], (result) => {
                 if (result.videoCompleted) {
                     progressElement.textContent = `Video Progress: 100% (Certificate Generated)`;
-                    chrome.storage.sync.set({generategeneratedCertificateShown: true });
-                    chrome.storage.sync.get('generategeneratedCertificateShown', (result) => {
-                        if(result.generategeneratedCertificateShown) {
-                            generatecertificatesectionElement.style.display = 'block';  
-                            generatedcertificatesectionElement.style.display = 'none'; 
-                        } 
-                    });
+                    generatecertificatesectionElement.style.display = 'block';
                 } else {
                     progressElement.textContent = `Video Progress: ${Math.round(progress)}%`;
                 }
@@ -122,12 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
          certificateElement.innerHTML = certificateContent;
         downloadButton.style.display = 'inline-block';
         shareButton.style.display = 'inline-block';
-        chrome.storage.sync.get('generategeneratedCertificateShown', (result) => {
-            if(result.generategeneratedCertificateShown !== true) {
-                generatecertificatesectionElement.style.display = 'none';  
-                generatedcertificatesectionElement.style.display = 'block'; 
-            }
-        });
     generatedcertificatesectionElement.style.display = 'block';
     generatecertificatesectionElement.style.display = 'none';
     }
