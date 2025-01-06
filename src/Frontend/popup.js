@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         try {
-            // Save both the certificate content and the generation state
+           
             chrome.storage.sync.set({ 
                 CCC: certificateContent,
                 certificateGenerated: true,

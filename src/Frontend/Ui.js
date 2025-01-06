@@ -10,6 +10,7 @@ const generateCertificatebtnElement = document.getElementById('generateCertifica
 const quizSection = document.getElementById('quizSection');
 
 const resetCertificateBtnElement = document.getElementById('resetCertificateButton')
+const resetQuizButtonElement = document.getElementById('resetQuizButton')
 
 const SECTIONS = {
     BUTTONS: 'Btn',
@@ -32,8 +33,14 @@ watchCertifyButton.addEventListener('click', () => {
 
 
   resetCertificateBtnElement.addEventListener('click', () => {
-    chrome.storage.sync.set({ currentSection: SECTIONS.BUTTONS, videoCompleted: false, videoProgress: 0 }, () => {
+    chrome.storage.sync.set({ currentSection: SECTIONS.BUTTONS, videoCompleted: false, videoProgress: 0, CCC:null }, () => {
       console.log('Progress reset successfully.');
+      updateUI();
+    });
+  });
+
+  resetQuizButtonElement.addEventListener('click', () => {
+    chrome.storage.sync.set({ currentSection: SECTIONS.BUTTONS}, () => {
       updateUI();
     });
   });
@@ -68,19 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (currentSection === SECTIONS.CERTIFICATE) {
         certificateSection.style.display = 'block';
         Hidebuttons();
-        // if (videoCompleted || videoProgress === 100) {
-        //     console.log("Video completed: showing certificate generation section");
-        //     GeneratecertificatesectionElement.style.display = 'block';
-        //   } else {
-        //     console.log("Video not completed: hiding certificate generation section");
-        //     // GeneratecertificatesectionElement.style.display = 'none';
-        //   }
-          
       } else if (currentSection === SECTIONS.QUIZ) {
         quizSection.style.display = 'block';
         Hidebuttons();
       } else if (currentSection === SECTIONS.BUTTONS) {
-        // quizSection.style.display = 'none';
+        quizSection.style.display = 'none';
         certificateSection.style.display = 'none';
         buttonContainerElement.style.display = 'block';
       }

@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LearnTube</title>
+  <title>Kalvium LearnTube</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <style>
     :root {
-      --primary-color: #3498db;     
-      --secondary-color: #2ecc71;    
-      --accent-color: #e74c3c;       
-      --background-color: #f7f9fc;   /* Soft Blue-White */
-      --text-color: #2c3e50;         /* Dark Slate Blue */
-      --card-background: #ffffff;    /* Pure White */
-      --shadow-color: rgba(0,0,0,0.1);
+      --primary-color: #3498db;
+      --secondary-color: #2ecc71;
+      --accent-color: #e74c3c;
+      --background-color: #f7f9fc;
+      /* Soft Blue-White */
+      --text-color: #2c3e50;
+      /* Dark Slate Blue */
+      --card-background: #ffffff;
+      /* Pure White */
+      --shadow-color: rgba(0, 0, 0, 0.1);
     }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
       transition: all 0.3s ease;
     }
+
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, var(--background-color), #ffffff);
@@ -32,27 +38,29 @@
       padding: 2rem;
       line-height: 1.6;
     }
+
     h1 {
-  color: black;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
+      color: black;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
     h1::before {
-  content: '';
-  display: inline-block;
-  width: 10rem;
-  height: 5rem;
-  background-image: url('/Public/Zohologo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-family: 'Font Awesome 5 Free';
-  color: var(--accent-color);
-}
+      content: '';
+      display: inline-block;
+      width: 10rem;
+      height: 5rem;
+      background-image: url('/Public/video-learning.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-family: 'Font Awesome 5 Free';
+      color: var(--accent-color);
+    }
 
 
 
@@ -92,7 +100,7 @@
     button:hover {
       background-color: var(--secondary-color);
       transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
 
     button:disabled {
@@ -116,7 +124,7 @@
       margin-top: 1rem;
     }
 
-    #downloadCertificateButton, 
+    #downloadCertificateButton,
     #shareLinkedInButton {
       background-color: var(--accent-color);
     }
@@ -131,44 +139,52 @@
 
     /* Subtle Animations */
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    #certificate, #quizContainer {
+    #certificate,
+    #quizContainer {
       animation: fadeIn 0.5s ease forwards;
     }
 
-    
 
 
-#Summarybtn {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
 
-#Summarybtn::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 30px;
-  height: 30px;
-  background-image: url('/Public/Kalviumlogo.webp');
-  background-size: cover;
-  background-position: center;
-}
-    
-    </style>
+    #Summarybtn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    #Summarybtn::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      background-image: url('/Public/Kalviumlogo.webp');
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 <script defer src="content.bundle.js"></script><script defer src="popup.bundle.js"></script><script defer src="ui.bundle.js"></script><script defer src="gemini.bundle.js"></script><script defer src="gc.bundle.js"></script><script defer src="BaseImage.bundle.js"></script></head>
+
 <body>
   <div class="container">
-    <h1>Learntube</h1>
+    <h1>Kalvium LearnTube</h1>
     <div id="buttonContainer">
       <button id="watchCertifyButton">Certify Watching Video</button>
       <button id="generateQuizButton">Generate Video & Certify Quiz</button>
@@ -177,27 +193,27 @@
     <div id="progressContainer">
       <div id="progressBar">Welcome! Start watching videos</div>
     </div>
-    
+
 
     <div id="certificateSection" style="display: none;">
-      
-    <div id="Generatecertificatesection" style="display: none;">
-      <p>Qutoes</p>
-      <input type="text" id="userName" placeholder="Enter your name">
-      <button id="generateCertificatebtn">Generate Certificate</button>
-    </div>
-    
-    <div id="generatedcertificatesection">
-      <div id="certificateDiv"></div>
-      
-      <p>Conguralation</p>
-      <button id="downloadCertificateButton" style="display: none;">Download Certificate</button>
-      <button id="shareLinkedInButton" style="display: none;">Share on LinkedIn</button>
+
+      <div id="Generatecertificatesection" style="display: none;">
+        <p>Qutoes</p>
+        <input type="text" id="userName" placeholder="Enter your name">
+        <button id="generateCertificatebtn">Generate Certificate</button>
+      </div>
+
+      <div id="generatedcertificatesection">
+        <div id="certificateDiv"></div>
+
+        <p>Conguralation</p>
+        <button id="downloadCertificateButton" style="display: none;">Download Certificate</button>
+        <button id="shareLinkedInButton" style="display: none;">Share on LinkedIn</button>
+      </div>
+
+      <button id="resetCertificateButton">Restart</button>
     </div>
 
-    <button id="resetCertificateButton">Restart</button>
-  </div>
-    
     <div id="quizSection" style="display: none;">
       <textarea id="userQuestion" rows="5" placeholder="Enter your learning request"></textarea>
       <div class="summary-container" style="
@@ -208,14 +224,14 @@
   border-radius: 15px;
   box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   font-family: 'Inter', -apple-system, system-ui, sans-serif;">
-  
-  <div class="summary-header" style="
+
+        <div class="summary-header" style="
       margin-bottom: 20px;
       padding-bottom: 15px;
       border-bottom: 2px solid #e1e8ff;">
-     
-  
-  <div id="videoD" style="
+
+
+          <div id="videoD" style="
       line-height: 1.8;
       color: #2d3748;
       font-size: 16px;
@@ -223,18 +239,19 @@
       padding: 20px;
       border-radius: 10px;
       border: 1px solid #e2e8f0;">
+          </div>
+          <div id="videoDetails"></div>
+          <input type="text" id="UserInput">
+          <button id="GenerateVideoLinksBtn">Generate Links</button>
+        </div>
+        <button id="Summarybtn"></button>
+      </div>
+      <div id="docLink">
+        <a id="googleDocLink" href="#" style="display: none;" target="_blank">Related Documents</a>
+      </div>
+      <button id="resetQuizButton">Restart</button>
+    </div>
   </div>
-  <div id="videoDetails"></div>
-  <input type="text" id="UserInput">
-  <button id="GenerateVideoLinksBtn">Generate Links</button>
-</div>
-  <button id="Summarybtn"></button>
-</div>
-  <div id = "docLink">
-    <a id ="googleDocLink" href="#"  style = "display: none;" target="_blank">Related Documents</a>
-  </div>
-  <button id="resetQuizButton">Restart</button>
-</div>
-</div>
 </body>
+
 </html>

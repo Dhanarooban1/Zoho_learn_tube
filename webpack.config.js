@@ -36,7 +36,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/Frontend/index.html', 
       filename: 'index.html', 
-      chunks: ["content",'popup',"ui","gemini","gc","BaseImage"]
+      chunks: ["BaseImage","content",'popup',"ui","gemini","gc"]
     }),
     new Dotenv()
   ],
